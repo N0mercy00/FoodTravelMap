@@ -12,7 +12,11 @@
 <div id="navbar">미식여행기</div>
 
 <div id="map" style="width:100%;height:100vh;"></div>
-<script type="text/javascript" src="/data/data.js"></script>
+
+<script type="text/javascript" src="/data/data_G.js"></script>
+<script type="text/javascript" src="/data/data_R.js"></script>
+<script type="text/javascript" src="/data/data_Y.js"></script>
+
 <script>
 //api 기본코드
 var mapOptions = {
@@ -26,14 +30,41 @@ var map = new naver.maps.Map('map', mapOptions);
 var markerList=[];
 var infowindowList=[];
 
-for(var i in data){
-    var target=data[i];
+//data_G
+for(var i in data_g){
+    var target=data_g[i];
     var latlng = new naver.maps.LatLng(target.lat, target.lng);
     marker=new naver.maps.Marker({
         map:map,
         position:latlng,
         icon:{
             content:"<div class='marker'></div>",
+            anchor:new naver.maps.Point(12,12)
+        },
+    })
+}
+//data_R
+for(var i in data_r){
+    var target_r=data_r[i];
+    var latlng_r = new naver.maps.LatLng(target_r.lat, target_r.lng);
+    marker_r=new naver.maps.Marker({
+        map:map,
+        position:latlng_r,
+        icon:{
+            content:"<div class='marker_r'></div>",
+            anchor:new naver.maps.Point(12,12)
+        },
+    })
+}
+//data_y
+for(var i in data_y){
+    var target_y=data_y[i];
+    var latlng_y = new naver.maps.LatLng(target_y.lat, target_y.lng);
+    marker_y=new naver.maps.Marker({
+        map:map,
+        position:latlng_y,
+        icon:{
+            content:"<div class='marker_y'></div>",
             anchor:new naver.maps.Point(12,12)
         },
     })
