@@ -59,6 +59,15 @@ body {
   border-radius: 50%;
 }
 
+.marker_b{
+  border: 1px solid black; /*테두리*/
+  background:  gray;
+  opacity: 0.8;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+}
+
 .infowindow_wrap{
   background: white;
   padding: 20px;

@@ -16,6 +16,7 @@
 <script type="text/javascript" src="/data/data_G.js"></script>
 <script type="text/javascript" src="/data/data_R.js"></script>
 <script type="text/javascript" src="/data/data_Y.js"></script>
+<script type="text/javascript" src="/data/data_B.js"></script>
 
 <script>
 //api 기본코드
@@ -115,6 +116,36 @@ for(var i in data_y){
      })
      markerList.push(marker_y); 
      infowindowList.push(infowindow_y);
+}
+
+//data_B
+for(var i in data_b){
+    var target_b=data_b[i];
+    var latlng_b = new naver.maps.LatLng(target_b.lat, target_b.lng);
+    marker_b=new naver.maps.Marker({
+        map:map,
+        position:latlng_b,
+        icon:{
+            content:"<div class='marker_b'></div>",
+            anchor:new naver.maps.Point(12,12)
+        },
+    });
+    var content_b=`<div class='infowindow_wrap'>
+        <div class='infowindow_title'>${target_b.title}</div>
+        <div class='infowindow_content'>${target_b.content}</div>
+        <div class='infowindow_score'>${target_b.score}</div>
+     </div>`
+
+     var infowindow_b = new naver.maps.InfoWindow({
+         content:content_b,
+         backgroundColor: "#00ff0000", 
+        borderColor: "#00ff0000", 
+        anchorSize: new naver.maps.Size(0, 0)
+
+     })
+     markerList.push(marker_b); 
+     infowindowList.push(infowindow_b);
+     console.log(target_b.title)
 }
 
 
