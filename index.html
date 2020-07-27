@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
-    <title>n0mercy Food Travle</title>
+    <title>Food Travle</title>
     <link rel="stylesheet" href="/stylesheets/style.css"/>
     <script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=yuv7tfnh0f"></script>
 </head>
@@ -41,7 +41,24 @@ for(var i in data_g){
             content:"<div class='marker'></div>",
             anchor:new naver.maps.Point(12,12)
         },
-    })
+    });
+
+var content_g=`<div class='infowindow_wrap'>
+        <div class='infowindow_title'>${target.title}</div>
+        <div class='infowindow_content'>${target.content}</div>
+        <div class='infowindow_score'>${target.score}</div>
+     </div>`
+
+     var infowindow = new naver.maps.InfoWindow({
+         content:content_g,
+         backgroundColor: "#00ff0000", 
+        borderColor: "#00ff0000", 
+        anchorSize: new naver.maps.Size(0, 0) 
+
+     })
+     markerList.push(marker); 
+     infowindowList.push(infowindow);
+
 }
 //data_R
 for(var i in data_r){
@@ -54,7 +71,22 @@ for(var i in data_r){
             content:"<div class='marker_r'></div>",
             anchor:new naver.maps.Point(12,12)
         },
-    })
+    });
+    var content_r=`<div class='infowindow_wrap'>
+        <div class='infowindow_title'>${target_r.title}</div>
+        <div class='infowindow_content'>${target_r.content}</div>
+        <div class='infowindow_score'>${target_r.score}</div>
+     </div>`
+
+     var infowindow_r = new naver.maps.InfoWindow({
+         content:content_r,
+         backgroundColor: "#00ff0000", 
+        borderColor: "#00ff0000", 
+        anchorSize: new naver.maps.Size(0, 0) 
+
+     })
+     markerList.push(marker_r); 
+     infowindowList.push(infowindow_r);
 }
 //data_y
 for(var i in data_y){
@@ -67,8 +99,55 @@ for(var i in data_y){
             content:"<div class='marker_y'></div>",
             anchor:new naver.maps.Point(12,12)
         },
-    })
+    });
+    var content_y=`<div class='infowindow_wrap'>
+        <div class='infowindow_title'>${target_y.title}</div>
+        <div class='infowindow_content'>${target_y.content}</div>
+        <div class='infowindow_score'>${target_y.score}</div>
+     </div>`
+
+     var infowindow_y = new naver.maps.InfoWindow({
+         content:content_y,
+         backgroundColor: "#00ff0000", 
+        borderColor: "#00ff0000", 
+        anchorSize: new naver.maps.Size(0, 0)
+
+     })
+     markerList.push(marker_y); 
+     infowindowList.push(infowindow_y);
 }
+
+
+//클릭시 이벤트 리스너
+for (var i = 0, ii = markerList.length; i < ii; i++) {
+                naver.maps.Event.addListener(map,"click",ClickMap(i));
+                naver.maps.Event.addListener(markerList[i], "click", getClickHandler(i));
+            }
+
+            //지도 클릭시 마커 닫기
+            function ClickMap(i){
+                return function(){
+                    var infowindow=infowindowList[i];
+                    infowindow.close()
+                }
+            }
+
+            //클릭을 하면 클릭한 i번째 놈 반환한다는거시여 클릭시 세부창 떠있으면 닫아주고 없으면 듸워주는
+            function getClickHandler(i) {
+                return function () {
+                    var marker = markerList[i];
+                    var infowindow = infowindowList[i];
+                    if (infowindow.getMap()) { 
+                        
+                        infowindow.close(); 
+                        
+                    } else {
+                        infowindow.open(map, marker) 
+                        
+                    }
+                } 
+            }
+
 </script>
 </body>
 </html>
